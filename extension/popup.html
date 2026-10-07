@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>字溫計</title>
+  <style>
+    :root{--fg:#1f2937;--muted:#6b7280;--line:#d1d5db;--bg:#fff;--soft:#f9fafb;--accent:#2563eb;--ok:#22a06b;--bad:#dc2626;--warn-bg:#fffbeb;--warn-line:#fcd34d}
+    @media (prefers-color-scheme: dark){
+      :root{--fg:#e5e7eb;--muted:#9ca3af;--line:#374151;--bg:#111827;--soft:#1f2937;--accent:#60a5fa;--ok:#34d399;--bad:#f87171;--warn-bg:#2a2410;--warn-line:#8a6d1a}
+    }
+    body{width:320px;margin:0;padding:14px;background:var(--bg);font:14px/1.5 system-ui,-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--fg)}
+    header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+    h1{font-size:16px;margin:0}
+    #ver{font-size:11px;color:var(--muted)}
+    label.row{display:flex;align-items:center;justify-content:space-between;margin:8px 0}
+    .field{margin:10px 0}
+    .field > span{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+    select,input[type=text],input[type=password]{width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit}
+    input[type=checkbox]{width:18px;height:18px}
+    a{color:var(--accent)}
+    button{padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--fg);font:inherit;cursor:pointer}
+    button:hover{filter:brightness(.96)}
+    #test{width:100%;margin-top:4px}
+    #testResult{font-size:12px;margin-top:6px;word-break:break-word}
+    #status{font-size:12px;color:var(--ok);height:16px;margin-top:6px}
+    .hint{font-size:12px;color:var(--muted);margin-top:3px}
+    .privacy{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.55}
+    #consent{border:1px solid var(--warn-line);background:var(--warn-bg);border-radius:8px;padding:10px 12px;margin:6px 0 10px;font-size:13px}
+    #consent h2{font-size:14px;margin:0 0 6px}
+    #consent ul{margin:0 0 8px;padding-left:18px}
+    #consent li{margin:3px 0}
+    #agree{width:100%;background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+    #settings.locked{opacity:.45;pointer-events:none}
+    #revoke{border:0;background:none;padding:0;color:var(--muted);text-decoration:underline;font-size:12px}
+    .hidden{display:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌡 字溫計</h1>
+    <span id="ver"></span>
+  </header>
+
+  <section id="consent" class="hidden">
+    <h2>使用前請先看這個</h2>
+    <ul>
+      <li>停止打字 1 秒後，<b>輸入框目前的文字（最多 300 字）</b>會傳送到你選擇的 AI 服務（Google Gemini 或 DeepSeek）做分析。不會送對話紀錄、帳號或其他頁面內容。</li>
+      <li>文字是從你的瀏覽器<b>直接</b>傳給該服務，不經過本擴充功能作者的伺服器；作者收不到你的文字或 API key。</li>
+      <li>各服務如何處理資料，請看下方「這個服務怎麼處理資料」。請不要在輸入框輸入密碼、證件號碼等機密內容。</li>
+      <li>API key 只存在這台瀏覽器的本機儲存空間，沒有加密。</li>
+    </ul>
+    <button id="agree" type="button">同意並開始使用</button>
+  </section>
+
+  <section id="settings">
+    <label class="row"><span>啟用偵測</span><input type="checkbox" id="enabled"></label>
+    <label class="row"><span>顯示語氣改寫建議</span><input type="checkbox" id="rewrite"></label>
+
+    <div class="field">
+      <span>收訊對象</span>
+      <select id="target"></select>
+    </div>
+
+    <div class="field">
+      <span>AI 服務</span>
+      <select id="provider"></select>
+    </div>
+
+    <div class="field">
+      <span id="keyLabel">API key</span>
+      <input type="password" id="apiKey" placeholder="貼上 key，只存在這台瀏覽器" autocomplete="off">
+      <div class="hint"><a id="keyLink" href="#" target="_blank" rel="noopener noreferrer">取得 API key</a>　<span id="keyHint"></span></div>
+    </div>
+
+    <div class="field">
+      <span>模型名稱</span>
+      <input type="text" id="model" spellcheck="false">
+    </div>
+
+    <button id="test" type="button">測試 API</button>
+    <div id="testResult"></div>
+    <div id="status"></div>
+
+    <p class="privacy" id="providerPrivacy"></p>
+  </section>
+
+  <p class="privacy">
+    <button id="revoke" type="button" class="hidden">撤回同意（停止傳送文字）</button>
+  </p>
+
+  <script src="shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

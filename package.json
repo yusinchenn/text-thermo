@@ -1,0 +1,36 @@
+{
+  "name": "text-thermo",
+  "version": "0.4.0",
+  "description": "字溫計 TextThermo：在聊天室輸入框打字時，偵測訊息的溫度與濕度，並依收訊對象提供語氣改寫建議的 Chrome 擴充功能。",
+  "private": true,
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yusinchenn/text-thermo.git"
+  },
+  "bugs": "https://github.com/yusinchenn/text-thermo/issues",
+  "homepage": "https://github.com/yusinchenn/text-thermo#readme",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24.0.0"
+  },
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "node tests/check-manifest.test.js && node tests/background.test.js && node tests/content.test.js && node tests/popup.test.js",
+    "test:e2e": "node tests/e2e/lexical.e2e.js",
+    "test:all": "npm run test:unit && npm run test:e2e",
+    "icons": "node scripts/make-icons.js",
+    "store-assets": "node scripts/make-store-assets.js",
+    "package": "node scripts/package.js"
+  },
+  "devDependencies": {
+    "@lexical/history": "^0.52.0",
+    "@lexical/plain-text": "^0.52.0",
+    "@lexical/rich-text": "^0.52.0",
+    "adm-zip": "^0.5.16",
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "lexical": "^0.52.0",
+    "playwright-core": "^1.56.0"
+  }
+}

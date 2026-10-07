@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "字溫計 TextThermo",
+  "version": "0.4.0",
+  "description": "打字停下來一秒後，偵測訊息的溫度與濕度，並依收訊對象提供語氣改寫建議。使用你自己的 Gemini 或 DeepSeek API key。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://generativelanguage.googleapis.com/*",
+    "https://api.deepseek.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://discord.com/*",
+        "https://www.messenger.com/*",
+        "https://web.telegram.org/*"
+      ],
+      "js": ["shared.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "字溫計",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="0.45" stop-color="#14b8a6"/>
+      <stop offset="0.75" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <!-- 圖樣畫在 96×96 的範圍內，四周留 16px 透明邊（Chrome 商店圖示規範） -->
+  <rect x="16" y="16" width="96" height="96" rx="24" fill="url(#bg)"/>
+  <!-- 溫度計 -->
+  <rect x="45" y="29" width="16" height="50" rx="8" fill="#fff"/>
+  <circle cx="53" cy="82" r="17" fill="#fff"/>
+  <rect x="50" y="46" width="6" height="36" rx="3" fill="#dc2626"/>
+  <circle cx="53" cy="82" r="10" fill="#dc2626"/>
+  <!-- 水滴 -->
+  <path d="M90 52 C90 52 76 68 76 78 a14 14 0 0 0 28 0 C104 68 90 52 90 52 Z" fill="#fff" fill-opacity="0.96"/>
+  <path d="M84 79 a6 6 0 0 0 6 6" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+</svg>
