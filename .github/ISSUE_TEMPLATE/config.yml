@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 回報安全性問題（請勿公開）
+    url: https://github.com/yusinchenn/text-thermo/security/advisories/new
+    about: API key 可能外洩、文字被送到非預期地方等問題，請用私下回報。
