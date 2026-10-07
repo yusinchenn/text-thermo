@@ -1,0 +1,63 @@
+name: 回報問題
+description: 沒有浮動框、分析失敗、「取代」不能用、某個網站不能用…
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感謝回報！**請不要貼出 API key，也不要貼私人對話內容或截圖。**
+        先看過 README 的〈疑難排解〉了嗎？
+  - type: dropdown
+    id: site
+    attributes:
+      label: 發生在哪個網站？
+      options: [Instagram, Messenger, Discord, Telegram Web, 其他（請在下方說明）]
+    validations:
+      required: true
+  - type: dropdown
+    id: provider
+    attributes:
+      label: 使用的 AI 服務
+      options: [Google Gemini, DeepSeek]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 擴充功能版本
+      description: 在設定面板右上角，例如 v0.4.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 瀏覽器與版本
+      placeholder: Chrome 141 / Windows 11
+  - type: textarea
+    id: what
+    attributes:
+      label: 發生了什麼事？
+      description: 你預期看到什麼、實際看到什麼？浮動框上有錯誤訊息的話請寫出來（含括號裡的錯誤代碼）。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 重現步驟
+      placeholder: |
+        1. 開啟…
+        2. 輸入（可以用假的句子代替真的內容）…
+        3. 停 1 秒…
+  - type: textarea
+    id: console
+    attributes:
+      label: Console 訊息（選填）
+      description: 在聊天分頁按 F12 → Console，篩選「字溫計」，貼上相關幾行。
+      render: text
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 確認
+      options:
+        - label: 我沒有在這份回報裡放入 API key 或私人對話內容
+          required: true
